@@ -85,6 +85,19 @@ let g:flashop_min_chars   = 2       " 小于这么短的内容不提示（x 删�
 " 想改颜色：hi FlashOp guibg=... / hi FlashOpMsg guifg=... guibg=...
 nnoremap <silent> <leader>tf :FlashOpToggle<CR>
 
+" -------------------------------------- 插入模式自动补全括号/引号（本地插件）
+"  逻辑：~/.vim/autoload/autopair.vim    映射：~/.vim/plugin/autopair.vim
+"   {  →  {}      ( [ " ' 同理，光标停在中间
+"   在空 {} 里回车 → 展开成三行，缩进交给 indentexpr/cindent
+"   <BS> 一次删掉一对；再敲一次闭符 → 光标跳过，不会出现 }} 或 ""
+"   后面紧跟单词时不配对；引号在注释/字符串/词尾不配对（don't 不会变 don''t）
+"   <CR> 的接管在下面 coc 那段（补全菜单开着时行为完全不变）
+let g:autopair_enabled      = 1
+let g:autopair_expand_cr    = 1     " 空 {} 里回车展开
+let g:autopair_cr_pairs     = '{}'  " 哪些对要展开（写 '{}([]' 也可以）
+let g:autopair_smart_quotes = 1     " 注释/字符串/词尾不配对引号
+nnoremap <silent> <leader>tp :AutoPairToggle<CR>
+
 " ---------------------------------------------------------------- 插件
 " 配色：onedark + 透明背景（保留 Ghostty 的 background-opacity = 0.8）
 let g:onedark_termcolors = 256
@@ -266,6 +279,9 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <silent><expr> <C-Space> coc#refresh()
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
       \ : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" 上面这条被自动配对接管：空 {} 里回车展开成三行，其余情况仍走 coc 的逻辑
+" （必须在上一行之后；只插入模式生效）
+inoremap <silent><expr> <CR> autopair#cr()
 
 " 跳转 / 查看
 nmap <silent> gd <Plug>(coc-definition)
