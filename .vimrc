@@ -313,6 +313,12 @@ endfunction
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>d :CocDiagnostics<CR>
+" 诊断开关：cb 只静音当前 buffer（一次性 .hpp / 试验文件），cB 全局开关
+" 末尾那句扫掉“孤儿标志”：clangd 崩过之后，coc 的 clear() 只清自己 map 里的
+" collection，没有 collection 归属的标志会一直在，只能直接 unplace
+nmap <silent> <leader>cb :call CocAction('diagnosticToggleBuffer', bufnr('%'))<CR>:sign unplace * group=*<CR>
+nmap <silent> <leader>cB :call CocAction('diagnosticToggle')<CR>
+nmap <silent> <leader>cR :CocRestart<CR>
 
 " 大纲 / 符号
 nmap <silent> <leader>o :CocOutline<CR>
@@ -343,4 +349,10 @@ augroup bigfile
   autocmd!
   autocmd BufReadPre * if getfsize(expand('<afile>')) > 5*1024*1024
         \ | setlocal norelativenumber noundofile | endif
+augroup END
+
+" 临时/一次性文件不挂诊断：放 /tmp 下的试验 .hpp 不该满屏红线
+augroup coc_scratch
+  autocmd!
+  autocmd BufReadPost,BufNewFile /tmp/*,/private/tmp/* let b:coc_diagnostic_disable = 1
 augroup END

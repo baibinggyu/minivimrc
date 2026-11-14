@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" role="img" aria-labelledby="coverTitle coverDesc">
+  <title id="coverTitle">minivimrc</title>
+  <desc id="coverDesc">一份 Vim 9.1 的 .vimrc：4 个插件 + coc LSP，透明 One Dark，底部是它自己的状态栏。</desc>
+  <defs>
+    <linearGradient id="edge" x1="0" y1="0" x2="1200" y2="400" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#61afef" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#98c379" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#e5c07b" stop-opacity=".35"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="180" cy="60" r="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#61afef" stop-opacity=".10"/>
+      <stop offset="1" stop-color="#61afef" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame">
+      <rect width="1200" height="400" rx="24"/>
+    </clipPath>
+  </defs>
+  <style>
+    .sans { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif; }
+    .mono { font-family: "SFMono-Regular", "JetBrains Mono", Consolas, "Liberation Mono", monospace; }
+  </style>
+
+  <g clip-path="url(#frame)">
+    <rect width="1200" height="400" fill="#21252b"/>
+    <rect width="1200" height="400" fill="url(#glow)"/>
+    <rect width="1200" height="400" fill="none" stroke="url(#edge)" stroke-width="2"/>
+  </g>
+
+  <!-- 眉标 -->
+  <text x="96" y="104" class="mono" font-size="16" font-weight="600" letter-spacing="3" fill="#61afef">VIM 9.1 · C / C++ / GO</text>
+
+  <!-- 标题 -->
+  <text x="94" y="180" class="sans" font-size="74" font-weight="800" letter-spacing="-2.4" fill="#d0d6df">minivimrc</text>
+
+  <!-- 一句话说明 -->
+  <text x="96" y="230" class="sans" font-size="21" font-weight="600" fill="#7f8a99">4 个插件，一份透明的 One Dark，C / C++ / Go 共用</text>
+
+  <!-- 源码里确认过的取舍 -->
+  <text x="96" y="264" class="mono" font-size="14" font-weight="500" fill="#5c6370">leader = &lt;Space&gt;  ·  tabstop = 2  ·  undo 持久化  ·  swap/backup 关</text>
+
+  <!-- 插件清单：Plug 行原文的四个仓库 -->
+  <g>
+    <text x="1104" y="104" class="mono" font-size="13" font-weight="700" letter-spacing="2" text-anchor="end" fill="#5c6370">4 PLUGS</text>
+
+    <line x1="760" y1="120" x2="1104" y2="120" stroke="#3b4048" stroke-width="1"/>
+    <text x="760" y="148" class="mono" font-size="16" font-weight="700" fill="#d0d6df">coc.nvim</text>
+    <text x="1104" y="148" class="mono" font-size="13" text-anchor="end" fill="#7f8a99">LSP · clangd / gopls</text>
+
+    <line x1="760" y1="166" x2="1104" y2="166" stroke="#3b4048" stroke-width="1" stroke-opacity=".7"/>
+    <text x="760" y="194" class="mono" font-size="16" font-weight="700" fill="#d0d6df">onedark.vim</text>
+    <text x="1104" y="194" class="mono" font-size="13" text-anchor="end" fill="#7f8a99">配色</text>
+
+    <line x1="760" y1="212" x2="1104" y2="212" stroke="#3b4048" stroke-width="1" stroke-opacity=".7"/>
+    <text x="760" y="240" class="mono" font-size="16" font-weight="700" fill="#d0d6df">vim-commentary</text>
+    <text x="1104" y="240" class="mono" font-size="13" text-anchor="end" fill="#7f8a99">gc / gcc</text>
+
+    <line x1="760" y1="258" x2="1104" y2="258" stroke="#3b4048" stroke-width="1" stroke-opacity=".7"/>
+    <text x="760" y="286" class="mono" font-size="16" font-weight="700" fill="#d0d6df">vim-surround</text>
+    <text x="1104" y="286" class="mono" font-size="13" text-anchor="end" fill="#7f8a99">cs / ds / ys</text>
+  </g>
+
+  <!-- 状态栏：SL() 的真实分段与配色 -->
+  <g>
+    <rect x="96" y="312" width="1008" height="44" rx="10" fill="#23272e" stroke="#3b4048"/>
+    <rect x="104" y="320" width="92" height="28" rx="5" fill="#61afef"/>
+    <text x="150" y="339" class="mono" font-size="13" font-weight="700" text-anchor="middle" fill="#1e222a">NORMAL</text>
+
+    <text x="212" y="339" class="mono" font-size="14" fill="#abb2bf">src/main.go</text>
+    <circle cx="332" cy="334" r="3.5" fill="#5c6370"/>
+
+    <!-- git 分支 -->
+    <g stroke="#98c379" stroke-width="2" fill="none" stroke-linecap="round">
+      <circle cx="352" cy="331" r="3"/><circle cx="352" cy="340" r="3"/><circle cx="361" cy="326" r="3"/>
+      <path d="M352 334v3M361 329v-1c0 4-9 3-9 6" />
+    </g>
+    <text x="372" y="339" class="mono" font-size="14" fill="#98c379">main</text>
+
+    <!-- 右侧：诊断 · 语言 · 光标 -->
+    <g stroke="#e06c75" stroke-width="1.8" fill="none">
+      <circle cx="892" cy="334" r="7"/><path d="M889 331l6 6M895 331l-6 6"/>
+    </g>
+    <text x="904" y="339" class="mono" font-size="14" font-weight="700" fill="#e06c75">1</text>
+
+    <g stroke="#e5c07b" stroke-width="1.8" fill="none" stroke-linejoin="round">
+      <path d="M948 340l7-12 7 12z"/>
+      <path d="M955 332.5v4"/>
+    </g>
+    <circle cx="955" cy="338.6" r=".9" fill="#e5c07b"/>
+    <text x="967" y="339" class="mono" font-size="14" font-weight="700" fill="#e5c07b">2</text>
+
+    <text x="1010" y="339" class="mono" font-size="14" fill="#56b6c2">go</text>
+    <text x="1088" y="339" class="mono" font-size="14" text-anchor="end" fill="#5c6370">42:7</text>
+  </g>
+</svg>
